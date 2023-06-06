@@ -1,0 +1,84 @@
+﻿//
+//      Subclasse. És una classe que es construeix heretant propietats, mètodes i events d'una altra classe que anomenem Superclasse o Classe Base.
+//
+//      Clàusula «abstract»
+//      -----------------------
+//      En la superclasse, tant la definició de la classe com els mètodes que inclou es poden definir afegint-hi la clàusula «abstract» amb la qual cosa
+//      s'indica que el codi no s'especifica en la superclasse sinó que es deixa per a fer-ho en les subclasses. És com si només definíssim l'esquelet
+//      de la classe per tal de poder especificar les relacions d'herència que s'han d'establir entre la superclasse i les subclasses derivades i deixant
+//      la codificació dels mètodes per a l'especificació de les subclasses derivades.
+//
+//      Cal remarcar que els mètodes declarats com «abstract» han de ser obligatòriament definits en les subclasses derivades.
+//		
+//      Una classe declarada com «abstract» no permet que es facin instanciacions d'objectes d'aquella classe. Per exemple, si tenim la superclasse ClVehicles
+//      definida com
+//
+//              public abstract class ClVehicles
+//              {
+//                  ···
+//              } 
+//	    
+//	    no podrem fer una instància del tipus   
+//	    
+//	            ClVehicles  v = new ClVehicles();
+//	    
+//	    
+//      Clàusules «virtual» i «override» (Polimorfisme)
+//      ---------------------------------------------------
+//      En la superclasse, tant la definició de propietats, com la de mètodes, com la d'events poden incloure la clàusula  «virtual» indicant que l'especificació
+//      feta en la superclasse pot ser modificada o eliminada en les subclasses derivades per tal de fer-ne una extensió o personalització. Això té com a conseqüéncia
+//		que podem tenir versions diferents d'un mateix mètode, d'una mateixa propietat o d'un mateix event i això és el que es coneix com POLIMORFISME.
+//
+//		Per a poder especificar diferents versions d'un mètode, propietat o event hem d'especificar la clàusula «override» en la subclasse indicant que la nova 
+//		especificació «sobreescriu» la de la classe base (superclasse).
+//
+//      Cal remarcar que els mètodes declarats com «virtual» no han de ser obligatòriament definits en les subclasses derivades i es poden ometre (diferència amb «abstract».
+//
+//      Veiem-ne un exemple amb la superclasse ClEmpleats i la subclasse ClVenedors:
+//	    
+//              public abstract class ClEmpleats
+//              {
+//                  public virtual string Nom{ get; set; } 
+//                  public virtual string NomXofer{ get; set; }         <----- només els Directius tindran xofer, a ClVenedors no hi figurarà 
+//                  
+//                  public virtual int DiesAntiguitat() {};
+//              } 
+//	    
+//	            public class ClVenedors : ClEmpleats        <----- així indiquem que la classe ClVenedors es deriva de ClEmpleats
+//              {
+//                  private string nom;
+//                  public override string Nom              <----- la clàusula «override» és necessària per a indicar que redefinim la propietat virtual Nom
+//                  {
+//                      get { return name; }
+//                      set {
+//                              if (value != String.Empty) {
+//                                  nom = value;
+//                              } else {
+//                                  nom = "** desconegut **";
+//                              }
+//                  }
+//                      
+//                  public override int DiesAntiguitat()
+//                  {
+//                      ···
+//                  }
+//              }
+//	    
+//	    
+//      Clàusula «protected»
+//      -------------------------------------
+//      Tant en la superclasse com en les subclasses podem utilitzar la clàusula «protected» per a especificar propietats, mètodes o events que volem que només siguin accessibles 
+//      en aquella classe.
+//	    
+//
+//      Clàusula «sealed»
+//      -------------------------------------
+//      La cláusula «sealed» es fa servir quan volem que una determinada propietat, mètode, event o la classe sencera no puguin ser heretades per una subclasse.
+//      Per exemple, amb la següent definició de la superclasse ClMotors i la subclasse ClMotorsElectrics podrem definir altres subclasses derivades de ClMotors
+//      però no podrem definir cap subclasse derivada de ClMotorsElectrics perquè està «segellada»:
+//
+//                    class ClMotors {}    
+//
+//                    sealed class ClMotorsElectrics : ClMotors {}
+//
+//
